@@ -9,12 +9,10 @@ const DELTAS = [
 ]
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$MoveTimer.start()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_pressed("ui_right"):
 		direction = 0
@@ -24,7 +22,9 @@ func _process(delta):
 		direction = 2
 	elif Input.is_action_pressed("ui_down"):
 		direction = 3
+	rotation_degrees = 90 * direction
 
 
 func _on_MoveTimer_timeout():
+	$Tail.move_tail(position)
 	position += 10 * DELTAS[direction]
