@@ -1,20 +1,26 @@
 extends Area2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export var step_scale = 24
 
 
-# Called when the node enters the scene tree for the first time.
+var collisions: int = 0
+
+
 func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _physics_process(_delta):
+	if collisions > 0:
+		var pick_from = get_viewport_rect().size / step_scale
+		var x = randi() % int(pick_from.x)
+		var y = randi() % int(pick_from.y)
+		position = step_scale * Vector2(x + 0.5, y + 0.5)
 
 
-func _on_Food_area_entered(area):
-	get_viewport().size
-	pass # Replace with function body.
+func _on_Food_area_entered(_area):
+	collisions += 1
+
+
+func _on_Food_area_exited(_area):
+	collisions -= 1

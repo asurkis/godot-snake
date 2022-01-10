@@ -7,10 +7,6 @@ func _ready():
 	pass
 
 
-#func _process(delta):
-#	pass
-
-
 func move_tail(parent_pos: Vector2):
 	if next != null:
 		next.move_tail($Sprite.position)

@@ -1,14 +1,28 @@
 extends Node
 
+export var food_amount = 20
+
 const Food = preload("res://food.tscn")
+const Tail = preload("res://tail.tscn")
 
 
 func _ready():
-	for i in range(20):
-		var inst = Food.instance()
-		inst.position = Vector2(24 * i, 0)
-		add_child(inst)
+	new_game()
 
 
-#func _process(delta):
-#	pass
+func new_game():
+	for _i in range(food_amount):
+		add_child(Food.instance())
+
+
+func game_over():
+	pass
+
+
+func _on_GameTimer_timeout():
+	$Head.step_forward()
+	pass # Replace with function body.
+
+
+func _on_Head_ate(food):
+	$Head.expand(Tail.instance())
