@@ -28,6 +28,7 @@ func _process(_delta):
 
 func new_game():
 	monitoring = false
+	$Tail.drop(0)
 
 
 func expand(fragment):
